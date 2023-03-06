@@ -5,6 +5,8 @@ let resetBtn = document.getElementById("resetBtn")
 
 let boxes = Array.from(document.getElementsByClassName("box"))
 
+const turnDisplay = document.getElementById('turn');
+
 // console.log(boxes)
 
 // creating players
@@ -20,26 +22,27 @@ let squares = Array(9).fill(null)
 
 const startGame = () => {
     boxes.forEach(box => box.addEventListener("click", boxClicked))
+    
 }
 
+//clicking on the boxes
 function boxClicked(e) {
     const id = e.target.id
 
     if(!squares[id]){
         squares[id] = currentPlayer
         e.target.innerText = currentPlayer
+        currentPlayer = currentPlayer === player1 ? player2: player1
+        // this should be showing whos turn is playing - player 1s turn player 2s turn
+        turnDisplay.textContent = `${currentPlayer}'s turn`;
 
         if(checkWinner() !==false) {
             playerText = `${currentPlayer} has won!`
-
             // console.log(winnerWinner)
 
         }
-
-        currentPlayer = currentPlayer === player1 ? player2: player1
-        
+       
     }
-    checkWinner()
 }
 
 // function checkWinner() {
@@ -63,6 +66,7 @@ function boxClicked(e) {
     //     }
     // }
 // }
+
 function checkWinner() {
     for (const condition of winningCombo) {
         let[a, b, c] = condition
@@ -75,7 +79,8 @@ function checkWinner() {
     return false
 }
 
-
+//reseting the buttons :)
+//reset to player1 being able to start again
 resetBtn.addEventListener("click", reset)
 
 function reset() {
