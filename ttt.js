@@ -25,7 +25,8 @@ const startGame = () => {
     
 }
 
-//clicking on the boxes
+//clicking on the boxes and defining each player
+// calling players out and showing who has been playing
 function boxClicked(e) {
     const id = e.target.id
 
@@ -34,8 +35,12 @@ function boxClicked(e) {
         e.target.innerText = currentPlayer
         currentPlayer = currentPlayer === player1 ? player2: player1
         // this should be showing whos turn is playing - player 1s turn player 2s turn
+        // will not implement for some reason, I tried redefining turnDisplay multiple times
+        // tried doing it different ways but this is what I thought looked best but I can't seem to get it to run
         turnDisplay.textContent = `${currentPlayer}'s turn`;
 
+        // I'm not sure if this is in the correct spot or not.... I'm guessing it needs to be somewhere different
+        // but I can't figure out where, I tried it within function checkWinner as well and wouldn't run...
         if(checkWinner() !==false) {
             playerText = `${currentPlayer} has won!`
             // console.log(winnerWinner)
@@ -47,6 +52,10 @@ function boxClicked(e) {
 
 // function checkWinner() {
 //     console.log("Checking for winner...")
+
+    // so this whole thing  along with the checkWinner should be bringing up who is winning
+    // I have reorganized it multiple times and tried doing some different methods and still can't get it to run
+    // the for loops should be looping through and checking each combination each time you are clicking squares
     let winningCombo = [
     [1, 4, 7],
     [2, 5, 8],
@@ -67,6 +76,7 @@ function boxClicked(e) {
         }
     }
 
+// this then is showing the conditions of getting the winning combos
 function checkWinner() {
     for (const condition of winningCombo) {
         let[a, b, c] = condition
@@ -81,6 +91,7 @@ function checkWinner() {
 
 //reseting the buttons :)
 //reset to player1 being able to start again
+// resets board and deletes all info that was previously put in and such
 resetBtn.addEventListener("click", reset)
 
 function reset() {
