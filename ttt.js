@@ -56,16 +56,16 @@ function boxClicked(e) {
     [7, 8, 9],
     [1, 5, 9],
     [3, 5, 7] ]
-    // for (let index = 0; index < winningCombo.length; index++) {
-    //     console.log(index, "winning combo 1st loop", winningCombo[index]);
-    //     // second loop - Begin
-    //     for (let index2 = 0; index2 < winningCombo[index].length;index2++) {
-    //         console.log("winning combo 2nd loop", winningCombo[index][index2]);
-    //         // comparison of combinations to squares that have been played
+    
+    for (let index = 0; index < winningCombo.length; index++) {
+        console.log(index, "winning combo 1st loop", winningCombo[index]);
+        // second loop - Begin
+        for (let index2 = 0; index2 < winningCombo[index].length;index2++) {
+            console.log("winning combo 2nd loop", winningCombo[index][index2]);
+            // comparison of combinations to squares that have been played
 
-    //     }
-    // }
-// }
+        }
+    }
 
 function checkWinner() {
     for (const condition of winningCombo) {
