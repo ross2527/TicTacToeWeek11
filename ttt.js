@@ -3,6 +3,8 @@
 let playerText = document.getElementById("playerText")
 let resetBtn = document.getElementById("resetBtn")
 
+// const board = ["", "", "", "", "", "", "", "", ""]
+
 let boxes = Array.from(document.getElementsByClassName("box"))
 
 const turnDisplay = document.getElementById('turn');
@@ -11,8 +13,8 @@ const turnDisplay = document.getElementById('turn');
 
 // creating players
 // creating at the start of the game who is playing
-const player1 = "O"
-const player2 = "X"
+const player1 = "X"
+const player2 = "O"
 let currentPlayer = player1
 
 //creating so one player can't steal a spot the other player has already chosen
@@ -33,24 +35,26 @@ function boxClicked(e) {
     if(!squares[id]){
         squares[id] = currentPlayer
         e.target.innerText = currentPlayer
-        currentPlayer = currentPlayer === player1 ? player2: player1
+       
         // this should be showing whos turn is playing - player 1s turn player 2s turn
         // will not implement for some reason, I tried redefining turnDisplay multiple times
         // tried doing it different ways but this is what I thought looked best but I can't seem to get it to run
-        turnDisplay.textContent = `${currentPlayer}'s turn`;
+        
 
         // I'm not sure if this is in the correct spot or not.... I'm guessing it needs to be somewhere different
         // but I can't figure out where, I tried it within function checkWinner as well and wouldn't run...
         if(checkWinner() !==false) {
-            playerText = `${currentPlayer} has won!`
+            playerText.textContent = `${currentPlayer} has won!`
             // console.log(winnerWinner)
 
         }
+        currentPlayer = currentPlayer === player1 ? player2: player1
+        turnDisplay.textContent = `${currentPlayer}'s turn`;
        
     }
 }
 
-// function checkWinner() {
+function checkWinner() {
 //     console.log("Checking for winner...")
 
     // so this whole thing  along with the checkWinner should be bringing up who is winning
@@ -67,27 +71,43 @@ function boxClicked(e) {
     [3, 5, 7] ]
     
     for (let index = 0; index < winningCombo.length; index++) {
-        console.log(index, "winning combo 1st loop", winningCombo[index]);
+        // console.log(index, "winning combo 1st loop", winningCombo[index]);
         // second loop - Begin
-        for (let index2 = 0; index2 < winningCombo[index].length;index2++) {
-            console.log("winning combo 2nd loop", winningCombo[index][index2]);
-            // comparison of combinations to squares that have been played
+        // for (let index2 = 0; index2 < winningCombo[index].length;index2++) {
+        //     console.log("winning combo 2nd loop", winningCombo[index][index2]);
+        //     // comparison of combinations to squares that have been played
 
-        }
-    }
+        // } 
+        let firstIndex = winningCombo[index][0]
+        let secondIndex = winningCombo[index][1]
+        let thirdIndex = winningCombo[index][2]
 
-// this then is showing the conditions of getting the winning combos
-function checkWinner() {
-    for (const condition of winningCombo) {
-        let[a, b, c] = condition
-        
+        // console.log("checking")
+        // console.log(squares[firstIndex])
+        // console.log(squares[secondIndex])
+        // console.log(squares[thirdIndex])
 
-        if(squares[a] && (squares[a] == squares[b] && squares[a] == squares[c])) {
-            return [a,b,c]
-        }
-    }  
+        if(squares[firstIndex] !== null && squares[firstIndex] === squares[secondIndex] && squares[secondIndex] === squares[thirdIndex]) {
+            // console.log(squares[firstIndex] + "has won") 
+            return true
+
+        } 
+    } 
     return false
 }
+
+// this then is showing the conditions of getting the winning combos
+// function checkWinner() {
+//     for (const condition of winningCombo) {
+//         let[a, b, c] = condition
+        
+
+//         if(squares[a] && (squares[a] == squares[b] && squares[a] == squares[c])) {
+//             return [a,b,c]
+//         }
+//     }  
+//     return false
+// }
 
 //reseting the buttons :)
 //reset to player1 being able to start again
