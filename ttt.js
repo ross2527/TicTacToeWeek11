@@ -43,10 +43,11 @@ function boxClicked(e) {
 
         // I'm not sure if this is in the correct spot or not.... I'm guessing it needs to be somewhere different
         // but I can't figure out where, I tried it within function checkWinner as well and wouldn't run...
-        if(checkWinner() !==false) {
+
+        if(checkWinner(id) !==false) {
             playerText.textContent = `${currentPlayer} has won!`
             // console.log(winnerWinner)
-
+            // some kind of loop that shows the ids of game cells then removes every one of them 
         }
         currentPlayer = currentPlayer === player1 ? player2: player1
         turnDisplay.textContent = `${currentPlayer}'s turn`;
@@ -54,9 +55,11 @@ function boxClicked(e) {
     }
 }
 
-function checkWinner() {
-//     console.log("Checking for winner...")
-
+function checkWinner(squareId) {
+    console.log("Checking for winner...", squareId)
+    let squareClick = document.getElementById(squareId)
+    console.log(squareClick)
+    squareClick.removeEventListener("click", () => console.log("removed click"))
     // so this whole thing  along with the checkWinner should be bringing up who is winning
     // I have reorganized it multiple times and tried doing some different methods and still can't get it to run
     // the for loops should be looping through and checking each combination each time you are clicking squares
@@ -120,10 +123,12 @@ function reset() {
     boxes.forEach(box => {
         box.innerText = ""
     })
+    let turn = document.getElementById("turn").innerHTML=""
 
-    playerText = "Tic Tac Toe"
+    playerText.textContent = "Tic Tac Toe"
 
     currentPlayer = player1
+    startGame()
 }
 
 startGame()
